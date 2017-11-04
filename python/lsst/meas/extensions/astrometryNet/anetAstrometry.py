@@ -319,10 +319,10 @@ class ANetAstrometryTask(pipeBase.Task):
             finally:
                 # Un-apply distortion
                 sourceCat.table.defineCentroid(oldCentroidName)
-                x0, y0 = exposure.getXY0()
                 wcs = exposure.getWcs()
                 if wcs:
-                    wcs.shiftReferencePixel(-bbox.getMinX() + x0, -bbox.getMinY() + y0)
+                    xy0 = exposure.getXY0()
+                    exposure.setWcs(wcs.copyAtShiftedPixelOrigin(xy0 - bbox.getMinXY()))
 
     @pipeBase.timeMethod
     def loadAndMatch(self, exposure, sourceCat, bbox=None):
