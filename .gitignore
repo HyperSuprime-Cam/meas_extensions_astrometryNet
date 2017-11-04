@@ -4,8 +4,10 @@
 *.pyc
 *.so
 _build.*
+.cache
 .sconf_temp/
 .sconsign.dblite
+pytest_session.txt
 config.log
 doc/html
 doc/doxygen.conf
